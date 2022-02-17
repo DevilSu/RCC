@@ -386,7 +386,7 @@ if __name__=="__main__":
     # ax =fig.add_subplot(111, aspect='equal')
 
     fig, axs=plt.subplots(1, 2, figsize=(20, 10))
-    # fig.tight_layout()
+    fig.tight_layout()
     plt.subplots_adjust(left=0.13, bottom=0.16)
 
     ax=axs[0]
@@ -395,19 +395,19 @@ if __name__=="__main__":
     major_ticks=np.arange(-90, 91, 20)
     minor_ticks=np.arange(-90, 91, 5)
 
-    ax.set_xticks(major_ticks)
-    ax.set_xticks(minor_ticks, minor=True)
-    ax.set_yticks(major_ticks)
-    ax.set_yticks(minor_ticks, minor=True)
+    axs[0].set_xticks(major_ticks)
+    axs[0].set_xticks(minor_ticks, minor=True)
+    axs[0].set_yticks(major_ticks)
+    axs[0].set_yticks(minor_ticks, minor=True)
 
-    ax.set_xlim([-50, 90])
-    ax.set_ylim([-90, 90])
+    axs[0].set_xlim([-50, 90])
+    axs[0].set_ylim([-90, 90])
 
     # And a corresponding grid
-    ax.grid(which='both')
+    axs[0].grid(which='both')
 
-    ax.set_xlabel("Front Right Wheel Steering Angle (deg)")
-    ax.set_ylabel("Front Left Wheel Steering Angle (deg)")
+    axs[0].set_xlabel("Front Right Wheel Steering Angle (deg)")
+    axs[0].set_ylabel("Front Left Wheel Steering Angle (deg)")
 
     # Define the 4 margins of the plot
     # ranging between 0~1
