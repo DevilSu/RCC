@@ -80,6 +80,27 @@ for ang_right in ang_right_list:
 ###############################################
 
 
+class TextResizer():
+    def __init__(self, texts, fig=None, ax=None, minimal=4):
+        if not fig: fig = plt.gcf()
+        if not ax: ax = plt.gca()
+        self.ax=ax
+        self.fig=fig
+        self.texts = texts
+        self.fontsizes = [t.get_fontsize() for t in self.texts]
+        _, self.windowheight = fig.get_size_inches()*fig.dpi
+        self.minimal= minimal
+
+    def __call__(self, event=None):
+        scale = event.height / self.windowheight
+        for i in range(len(self.texts)):
+            newsize = np.max([int(self.fontsizes[i]*scale), self.minimal])
+            self.texts[i].set_fontsize(newsize)
+
+        newsize = np.max([int(12*scale), self.minimal])
+        self.ax.legend(prop={'size': newsize})
+
+
 ###############################################
 # Plot
 ###############################################
@@ -112,9 +133,16 @@ ax.grid(which='both')
 ax.grid(which='minor', alpha=0.2)
 ax.grid(which='major', alpha=0.5)
 
-ax.set_title("Ackeman Steering")
-ax.set_xlabel("Right front wheel steering angle (deg)")
-ax.set_ylabel("Left front wheel steering angle (deg)")
+t1=ax.set_title("Ackeman Steering")
+t2=ax.set_xlabel("Right front wheel steering angle (deg)")
+t3=ax.set_ylabel("Left front wheel steering angle (deg)")
+t4=ax.get_xticklabels()
+t5=ax.get_yticklabels()
+lst_text=[t1, t2, t3]
+lst_text.extend(t4)
+lst_text.extend(t5)
+
+cid=plt.gcf().canvas.mpl_connect("resize_event", TextResizer(lst_text))
 
 plt.show()
 ###############################################

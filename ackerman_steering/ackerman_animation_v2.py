@@ -38,7 +38,8 @@ class Ackerman:
 
     def init_plot(self):
 
-        # DARK MODE !
+        # DARK MODE!
+        # /anaconda3/envs/{env_name}/lib/python3.7/site-packages/matplotlib/mpl-data/stylelib/{dvs_dark.mplstyle}
         # plt.style.use("dark_background")
         # plt.style.use("dvs_dark")
 
